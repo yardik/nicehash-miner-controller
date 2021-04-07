@@ -54,7 +54,7 @@ def hello_world():
     return 'hello world!'
 
 
-@app.route("/activate/<rig_id>", methods=['PUT'])
+@app.route("/activate/<rig_id>", methods=['PUT', 'POST'])
 def activate(rig_id):
     base = os.environ.get('BASE_URL', 'https://api2.nicehash.com')
     org = ORG
@@ -71,7 +71,7 @@ def activate(rig_id):
     return resp
 
 
-@app.route("/deactivate/<rig_id>", methods=['PUT'])
+@app.route("/deactivate/<rig_id>", methods=['PUT', 'POST'])
 def deactivate(rig_id):
     base = os.environ.get('BASE_URL', 'https://api2.nicehash.com')
     org = ORG
