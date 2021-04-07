@@ -72,9 +72,9 @@ def activate(rig_id):
 @app.route("/deactivate/<rig_id>", methods=['PUT'])
 def deactivate(rig_id):
     base = os.environ.get('BASE_URL', 'https://api2.nicehash.com')
-    org = os.environ.get('ORG', '')
-    key = os.environ.get('KEY', '')
-    secret = os.environ.get('SECRET', '')
+    org = ORG
+    key = KEY
+    secret = SECRET
     api = PrivateApi(base, org, key, secret)
 
     resp = {}
