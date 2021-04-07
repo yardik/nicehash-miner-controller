@@ -2,7 +2,7 @@ import optparse
 import os
 from flask import Flask
 from private_api import PrivateApi
-
+from google.cloud import secretmanager
 
 def activate_rig(api, rig_id):
     print(f'Activating rig:{rig_id}')
@@ -41,6 +41,11 @@ def deactivate_rig(api, rig_id):
 
 
 app = Flask(__name__)
+PROJECT_ID = os.environ.get("PROJECTID")
+secrets = secretmanager.SecretManagerServiceClient()
+ORG = secrets.access_secret_version(request={"name": "projects/"+PROJECT_ID+"/secrets/NICEHASH_ORG/versions/1"}).payload.data.decode("utf-8")
+KEY = secrets.access_secret_version(request={"name": "projects/"+PROJECT_ID+"/secrets/NICEHASH_KEY/versions/1"}).payload.data.decode("utf-8")
+SECRET = secrets.access_secret_version(request={"name": "projects/"+PROJECT_ID+"/secrets/NICEHASH_SECRET/versions/1"}).payload.data.decode("utf-8")
 
 @app.route("/", methods=['GET'])
 def hello_world():
