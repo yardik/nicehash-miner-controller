@@ -17,6 +17,7 @@ def activate_rig(api, rig_id):
         resp = api.update_rig_status(rig_id, 'START')
         print(f'Response from activate: {resp}')
     else:
+        resp = {'status': 'ALREADY_MINING'}
         print('Already MINING!')
 
     return resp
@@ -35,6 +36,7 @@ def deactivate_rig(api, rig_id):
         resp = api.update_rig_status(rig_id, 'STOP')
         print(f'Response from deactivate: {resp}')
     else:
+        resp = {'status': 'ALREADY_STOPPED'}
         print('Already STOPPED!')
 
     return resp
